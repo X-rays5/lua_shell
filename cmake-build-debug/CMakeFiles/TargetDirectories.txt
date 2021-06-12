@@ -1,0 +1,3 @@
+C:/Users/X-ray/source/repos/lua_shell/cmake-build-debug/CMakeFiles/lua_shell.dir
+C:/Users/X-ray/source/repos/lua_shell/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/X-ray/source/repos/lua_shell/cmake-build-debug/CMakeFiles/rebuild_cache.dir
