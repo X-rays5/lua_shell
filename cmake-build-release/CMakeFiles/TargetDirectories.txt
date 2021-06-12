@@ -1,3 +1,0 @@
-C:/Users/X-ray/source/repos/lua_shell/cmake-build-release/CMakeFiles/lua_shell.dir
-C:/Users/X-ray/source/repos/lua_shell/cmake-build-release/CMakeFiles/edit_cache.dir
-C:/Users/X-ray/source/repos/lua_shell/cmake-build-release/CMakeFiles/rebuild_cache.dir
