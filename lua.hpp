@@ -33,6 +33,7 @@ namespace lua {
                                       sol::lib::io,
                                       sol::lib::package
                                       );
+            //lua_state_.set_panic(sol::c_call<decltype(&lua_state::Panic), &lua_state::Panic>);
         }
 
         template<typename... Args>
@@ -52,9 +53,9 @@ namespace lua {
         }
 
         void RunText(std::string text) {
-            auto script = lua_state_.script(text);
-            if (!script.valid()) {
-                sol::error e = script;
+            auto result = lua_state_.script(text);
+            if (!result.valid()) {
+                sol::error e = result;
                 throw(lua_exception(e.what()));
             }
         }
@@ -66,6 +67,14 @@ namespace lua {
             if (!result.valid()) {
                 sol::error e = result;
                 throw(lua_exception(e.what()));
+            }
+        }
+
+        inline void Panic(sol::optional<std::string> maybe_msg) {
+            std::cerr << "Lua is in a panic state application is closing\n";
+            if (maybe_msg) {
+                const std::string& msg = maybe_msg.value();
+                std::cerr << "\tError message: " << msg << std::endl;
             }
         }
     };

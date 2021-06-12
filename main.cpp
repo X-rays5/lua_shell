@@ -1,10 +1,10 @@
 #include <iostream>
 #include <string>
+#include <fstream>
+#include <filesystem>
 #include "lua.hpp"
 
-lua::lua_state lua_;
-
-void go() {
+void go(lua::lua_state& lua_) {
     std::cout << "lua> ";
     std::string command;
     std::getline(std::cin, command);
@@ -14,16 +14,26 @@ void go() {
         lua_ = std::move(lua::lua_state());
     } else {
         try {
-            lua_.RunText(command);
+            std::ofstream writer("lua_shell.tmp");
+            if (writer.is_open()) {
+                writer << command;
+                writer.close();
+                lua_.ExcecuteFile("lua_shell.tmp");
+                std::filesystem::remove("lua_shell.tmp");
+            } else {
+                std::cout << "Couldn't execute";
+            }
         } catch (lua::lua_exception &e) {
             std::cout << e.what() << "\n";
         }
     }
-    go();
+    go(lua_);
 }
 
 int main() {
     std::cout << "Lua interactive shell started.\n\n";
-    go();
+
+    lua::lua_state lua_;
+    go(lua_);
     return EXIT_FAILURE;
 }
