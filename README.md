@@ -1,5 +1,5 @@
 # lua_shell
-| Command | Use |
+| Command | Description |
 | ------------- | ------------- |
 | new_lua | creates a new lua state |
 | new_multi_line | won't excecute the script immediately when pressing enter |
