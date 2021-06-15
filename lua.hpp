@@ -33,7 +33,7 @@ namespace lua {
                                       sol::lib::io,
                                       sol::lib::package
                                       );
-            //lua_state_.set_panic(sol::c_call<decltype(&lua_state::Panic), &lua_state::Panic>);
+            lua_state_.set_panic(sol::c_call<decltype(&lua_state::Panic), &lua_state::Panic>);
         }
 
         template<typename... Args>
@@ -52,6 +52,7 @@ namespace lua {
             }
         }
 
+        // This function is not safe and can cause lua to go into panic state and abort()
         void RunText(std::string text) {
             auto result = lua_state_.script(text);
             if (!result.valid()) {
